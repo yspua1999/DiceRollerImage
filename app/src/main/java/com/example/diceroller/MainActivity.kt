@@ -22,10 +22,6 @@ class MainActivity : AppCompatActivity() {
 
         val resetButton: Button = findViewById(R.id.reset_button)
         resetButton.setOnClickListener { resetBtn() }
-
-        val calculateButton: Button = findViewById(R.id.calculate_button)
-        calculateButton.setOnClickListener { calculateTotal() }
-        calculateButton.isEnabled = false
     }
 
     private fun rollDice() {
@@ -34,7 +30,6 @@ class MainActivity : AppCompatActivity() {
         val resultTest1: TextView = findViewById(R.id.result_text)
         val resultTest2: TextView = findViewById(R.id.result_text1)
         val resultTest3: TextView = findViewById(R.id.result_text2)
-        val calculateButton : Button = findViewById(R.id.calculate_button)
 
         val randomInt = Random().nextInt(6) + 1
         val randomInt1 = Random().nextInt(6) + 1
@@ -44,10 +39,7 @@ class MainActivity : AppCompatActivity() {
         resultTest2.text = randomInt1.toString()
         resultTest3.text = randomInt2.toString()
 
-        if(!calculateButton.isEnabled)
-        {
-            calculateButton.isEnabled = true
-        }
+        calculateTotal()
 
     }
 
@@ -55,20 +47,19 @@ class MainActivity : AppCompatActivity() {
         val resultTest1: TextView = findViewById(R.id.result_text)
         val resultTest2: TextView = findViewById(R.id.result_text1)
         val resultTest3: TextView = findViewById(R.id.result_text2)
-        val calculateButton : Button = findViewById(R.id.calculate_button)
 
         val resultNum1 = resultTest1.text.toString()
         val resultNum2 = resultTest2.text.toString()
         val resultNum3 = resultTest3.text.toString()
 
-        if(resultNum1 == "Random Number 1" || resultNum2 == "Random Number 2" || resultNum3 == "Random Number 3"){
-            if(resultNum1 == "Random Number 1"){
+        if(resultNum1 == "Dice Number 1" || resultNum2 == "Dice Number 2" || resultNum3 == "Dice Number 3"){
+            if(resultNum1 == "Dice Number 1"){
                 resultTest1.text = "1"
             }
-            if(resultNum2 == "Random Number 2") {
+            if(resultNum2 == "Dice Number 2") {
                 resultTest2.text = "1"
             }
-            if(resultNum3 == "Random Number 3"){
+            if(resultNum3 == "Dice Number 3"){
                 resultTest3.text = "1"
             }
         }else{
@@ -84,10 +75,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        if(!calculateButton.isEnabled)
-        {
-            calculateButton.isEnabled = true
-        }
+        calculateTotal()
     }
 
     private fun resetBtn() {
