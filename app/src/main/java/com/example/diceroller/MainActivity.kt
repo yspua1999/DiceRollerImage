@@ -3,12 +3,19 @@ package com.example.diceroller
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import kotlinx.android.synthetic.main.activity_main.*
 import org.w3c.dom.Text
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
+
+    lateinit var diceImage : ImageView
+    lateinit var diceImage2 : ImageView
+    lateinit var diceImage3 : ImageView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,89 +24,37 @@ class MainActivity : AppCompatActivity() {
         val rollButton: Button = findViewById(R.id.roll_button)
         rollButton.setOnClickListener { rollDice() }
 
-        val countButton: Button = findViewById(R.id.count_up)
-        countButton.setOnClickListener { countUp() }
+        diceImage = findViewById(R.id.dice_image)
+        diceImage2 = findViewById(R.id.dice_image2)
+        diceImage3 = findViewById(R.id.dice_image3)
 
-        val resetButton: Button = findViewById(R.id.reset_button)
-        resetButton.setOnClickListener { resetBtn() }
     }
 
     private fun rollDice() {
         //Toast.makeText(this, "button clicked", Toast.LENGTH_SHORT).show()
 
-        val resultTest1: TextView = findViewById(R.id.result_text)
-        val resultTest2: TextView = findViewById(R.id.result_text1)
-        val resultTest3: TextView = findViewById(R.id.result_text2)
+        //val diceImage : ImageView = findViewById(R.id.dice_image)
+
+        diceImage.setImageResource(getRandomDiceImage())
+        diceImage2.setImageResource(getRandomDiceImage())
+        diceImage3.setImageResource(getRandomDiceImage())
+
+    }
+
+    private fun getRandomDiceImage() : Int{
 
         val randomInt = Random().nextInt(6) + 1
-        val randomInt1 = Random().nextInt(6) + 1
-        val randomInt2 = Random().nextInt(6) + 1
 
-        resultTest1.text = randomInt.toString()
-        resultTest2.text = randomInt1.toString()
-        resultTest3.text = randomInt2.toString()
+        val drawableResource = when (randomInt){
+            1 -> R.drawable.dice_1
+            2 -> R.drawable.dice_2
+            3 -> R.drawable.dice_3
+            4 -> R.drawable.dice_4
+            5 -> R.drawable.dice_5
+            else -> R.drawable.dice_6
 
-        calculateTotal()
-
-    }
-
-    private fun countUp() {
-        val resultTest1: TextView = findViewById(R.id.result_text)
-        val resultTest2: TextView = findViewById(R.id.result_text1)
-        val resultTest3: TextView = findViewById(R.id.result_text2)
-
-        val resultNum1 = resultTest1.text.toString()
-        val resultNum2 = resultTest2.text.toString()
-        val resultNum3 = resultTest3.text.toString()
-
-        if(resultNum1 == "Dice Number 1" || resultNum2 == "Dice Number 2" || resultNum3 == "Dice Number 3"){
-            if(resultNum1 == "Dice Number 1"){
-                resultTest1.text = "1"
-            }
-            if(resultNum2 == "Dice Number 2") {
-                resultTest2.text = "1"
-            }
-            if(resultNum3 == "Dice Number 3"){
-                resultTest3.text = "1"
-            }
-        }else{
-            if(resultNum1 < "6") {
-                resultTest1.text = (resultNum1.toInt() + 1).toString()
-            }
-            if(resultNum2 < "6") {
-                resultTest2.text = (resultNum2.toInt() + 1).toString()
-
-            }
-            if(resultNum3 < "6") {
-                resultTest3.text = (resultNum3.toInt() + 1).toString()
-            }
         }
 
-        calculateTotal()
-    }
-
-    private fun resetBtn() {
-        val resultTest1: TextView = findViewById(R.id.result_text)
-        val resultTest2: TextView = findViewById(R.id.result_text1)
-        val resultTest3: TextView = findViewById(R.id.result_text2)
-        val resultTotal: TextView = findViewById(R.id.result_total)
-
-        resultTest1.text = "0"
-        resultTest2.text = "0"
-        resultTest3.text = "0"
-        resultTotal.text = "0"
-    }
-
-    private fun calculateTotal() {
-        val resultTest1: TextView = findViewById(R.id.result_text)
-        val resultTest2: TextView = findViewById(R.id.result_text1)
-        val resultTest3: TextView = findViewById(R.id.result_text2)
-        val resultTotal: TextView = findViewById(R.id.result_total)
-
-        val resultNumb1 = resultTest1.text.toString().toInt()
-        val resultNumb2 = resultTest2.text.toString().toInt()
-        val resultNumb3 = resultTest3.text.toString().toInt()
-
-        resultTotal.text = (resultNumb1 + resultNumb2 + resultNumb3).toString()
+        return drawableResource
     }
 }
